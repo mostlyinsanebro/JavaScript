@@ -1,0 +1,24 @@
+// Difference between website and web application
+
+// A website is a collection of web pages and the content is basically 
+// static and it does not interact with your device necessarily.
+
+
+// A web application is also a kind of website but it has much more functionality
+// can intercat with the browser, can interact with trhe device and is more complex to build.
+
+// JavaScript can do various things ->
+// 1. It can be used to interact with the browser in order to create interactive web applications.
+
+// 2. It can also be used to create web applications which run on web servers outside of the web browser.
+// Node.js is used for this purpose.
+
+// 3. It can also be used to create desktop applications with the help of react native, ionic and tools like electron.
+
+// 4. It can also be used to create mobile applications.
+
+// JavaScript Releases:- 
+// We are using ES6 right now which came in 2015. It is known as mo0dern javascript.
+// There are new updates to JS with minor updates to es6 every single year.
+
+// ES == ECMAScript
