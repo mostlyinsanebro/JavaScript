@@ -1,4 +1,5 @@
-// Arrow fuctions are basically another way of writing functions in js. They are expressions.
+// Arrow fuctions are basically another way of writing functions in js. They are speacial form of 
+// function expressions.
 
 // Arrow functions can be used when we have a single input parameter and a single line of code
 // returning something as it does not have a return statement in that case.
