@@ -1,5 +1,6 @@
 // Arrays are used to store multiple values and point to them using a single variable.
 
+
 const friends = ['Michael','Steven','Peter'];
 console.log(friends);
 
