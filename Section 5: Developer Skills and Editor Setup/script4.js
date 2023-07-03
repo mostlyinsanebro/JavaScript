@@ -9,6 +9,7 @@
 // 3. Research
 // how to concatenate strings in js (+)
 
+
 // Solution:-
 const printForecast = function (arr) {
   let result = '';
