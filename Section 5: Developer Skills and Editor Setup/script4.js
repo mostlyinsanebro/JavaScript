@@ -6,6 +6,7 @@
 // concatenate the string from the last iteration at the starting of current string.
 // return the string.
 
+
 // 3. Research
 // how to concatenate strings in js (+)
 
