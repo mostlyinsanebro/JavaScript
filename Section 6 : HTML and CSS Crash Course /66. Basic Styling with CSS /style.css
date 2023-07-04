@@ -1,0 +1,22 @@
+/* css can be written in the head section in style element or in a differemnt file like this.*/
+body {
+  background-color: rgb(239, 242, 190);
+  font-family: Arial;
+  font-size: 20px;
+}
+
+/* font-family attribute gets inherited means if we set the font-family for body, then all the 
+child elements will also be assigned this property */
+
+h1 {
+  font-size: 50px;
+}
+
+.first {
+  color: red;
+}
+
+#your-name {
+  background-color: rgb(221, 235, 110);
+  border: 5px solid #444;
+}
