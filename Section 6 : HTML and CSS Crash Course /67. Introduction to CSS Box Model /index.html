@@ -1,0 +1,61 @@
+<!-- Attributes are basically used to describe the elements in HTML.-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learning HTML and CSS</title>
+
+    <!-- inline css
+      <style>
+      body {
+        background-color: green;
+      }
+    </style> 
+  -->
+
+    <!-- Linking a css file-->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- h1 tag is the child tag of body tag here.-->
+    <h1>Learing HTML and CSS</h1>
+
+    <p class="first">
+      HTML stands for Hypertext Markup Language which is used to structure our
+      web pages. HTML document is made out of elements and we write elements
+      using an opening and closing tag.See it on my hackerrank profile
+
+      <!-- a is the anchor tag used to add links to our webpage with the help of href attribute.
+        It is an inline tag means it is displayed in the same line as content of previous element.-->
+
+      <a href="https://www.hackerrank.com/abhi8059395364?hr_r=1">
+        on HackerRank</a
+      >.
+    </p>
+
+    <!-- h6 is a block element and therefore, it is displayed in a new line.-->
+    <h2 class="second">Another heading</h2>
+    <p class="second">Another paragraph.</p>
+
+    <!-- img is a self closing tag as it makes no sense to write anything in image tag.
+         Different elements have differemnt attributes.-->
+    <img
+      id="course-image"
+      src="https://www.udemy.com/course/design-and-develop-a-killer-website-with-html5-and-css3/"
+      alt="There was a picture displayed here."
+    />
+
+    <!--There are two common attributes that we can use on all elements to identify them in order to style them
+        using CSS -> Classes and Id's.They are used to name the elements and then use them in CSS. Id's are unique, classes are not
+    -->
+
+    <!--Now, we aqre going to create a form in our page.-->
+    <form id="your-name">
+      <h2>Your Name</h2>
+      <p class="first">Please enter your name here.</p>
+      <input type="text" placeholder="Your name" />
+      <button>OK!</button>
+    </form>
+  </body>
+</html>
