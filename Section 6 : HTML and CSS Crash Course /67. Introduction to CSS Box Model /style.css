@@ -1,0 +1,65 @@
+/* css can be written in the head section in style element or in a differemnt file like this.*/
+/* Css Box Model states that each and every element in CSS can be seen as a box and each box has the following
+things 
+1. Content :- text, image etc.
+2. Padding: transparent area around the content but still inside the box.
+3. Border : Border around the content and padding.
+4. Margin: Spaces between boxes.
+
+There is also fill-area which covers the content, 
+padding and border as well like background color,background image etc.
+This excludes the margin only.
+*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgb(239, 242, 190);
+  font-family: Arial;
+  font-size: 20px;
+  margin: 50px;
+  padding: 0;
+}
+
+/* font-family attribute gets inherited means if we set the font-family for body, then all the 
+child elements will also be assigned this property */
+
+h1 {
+  font-size: 50px;
+}
+
+.first {
+  color: red;
+}
+
+#your-name {
+  background-color: rgb(221, 235, 110);
+  border: 5px solid #444;
+  padding: 15px;
+  width: 400px;
+}
+
+h2 {
+  margin: 10px;
+  text-align: center;
+}
+
+input,
+button {
+  padding: 5px;
+  font-size: 16px;
+}
+
+#course-image {
+  padding-bottom: 15px;
+  width: 300px;
+}
+
+a {
+  background-color: yellow;
+}
+
+#your-name h2 {
+  color: olivedrab;
+}
