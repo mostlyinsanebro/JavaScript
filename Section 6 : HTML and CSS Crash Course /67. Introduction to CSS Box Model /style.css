@@ -10,6 +10,7 @@ There is also fill-area which covers the content,
 padding and border as well like background color,background image etc.
 This excludes the margin only.
 */
+
 * {
   box-sizing: border-box;
 }
