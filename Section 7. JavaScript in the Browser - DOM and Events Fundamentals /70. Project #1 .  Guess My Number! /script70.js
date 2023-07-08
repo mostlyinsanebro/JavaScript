@@ -1,3 +1,5 @@
+// 71. What's the DOM and DOM Manipulation
+
 'use strict';
 
 // In order to select an element from the html page, we can use the selector
