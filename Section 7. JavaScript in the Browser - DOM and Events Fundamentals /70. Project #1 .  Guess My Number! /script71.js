@@ -1,3 +1,5 @@
+// 71.What's the DOM and DOM Manipulation
+
 // DOM stands for Document Object Model. It is a structured representation of HTML documents
 // and it allows JS to access HTML elements and styles in order to manipulate them.
 
