@@ -1,4 +1,4 @@
-// 71. What's the DOM and DOM Manipulation
+// 70. Project #1 : Guess My Number
 
 'use strict';
 
