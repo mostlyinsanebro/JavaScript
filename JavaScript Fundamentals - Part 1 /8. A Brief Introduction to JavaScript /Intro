@@ -4,9 +4,9 @@
 
 // object-oriented means it is built on objects for storing most kinds of data.
 
-// multi-paradigm menas we can use different styles of programming. We can use imperative and declrarative programming styles.
+//Multi-paradigm means we can use different styles of programming. We can use imperative and declarative programming styles.
 
-// programming language => it instructs computer to do things.
+// programming language => it instructs the computer to do things.
 
 // Difference between website and web application
 
@@ -15,20 +15,20 @@
 
 
 // A web application is also a kind of website but it has much more functionality
-// can interact with the browser, can interact with the device and is more complex to build.
+// can interact with the browser, can interact with the device, and is more complex to build.
 
 // JavaScript can do various things ->
 // 1. It can be used to interact with the browser in order to create interactive web applications.
 
-// 2. It can also be used to create web applications which run on web servers outside of the web browser.
+// 2. It can also be used to create web applications that run on web servers outside of the web browser.
 // Node.js is used for this purpose.
 
-// 3. It can also be used to create desktop applications with the help of react native, ionic and tools like electron.
+// 3. It can also be used to create desktop applications with the help of react native, ionic, and tools like Electron.
 
 // 4. It can also be used to create mobile applications.
 
 // JavaScript Releases:- 
-// We are using ES6 right now which came in 2015. It is known as mo0dern javascript.
+// We are using ES6 right now which came in 2015. It is known as modern javascript.
 // There are new updates to JS with minor updates to es6 every single year.
 
 // ES == ECMAScript
