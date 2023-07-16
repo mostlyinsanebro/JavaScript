@@ -7,12 +7,12 @@ console.log(js);
 // define js as amazing
 js = 'amazing';
 
-// if js is amazing, then log on the console 'js is fun'
+//If js is amazing, then log on to the console 'js is fun'
 if(js == 'amazing')
 console.log('js is fun');
 
 
-// we can also pass the variable diectyly to console
+//We can also pass the variable directly to console
 js = 48
 
 console.log(js);
