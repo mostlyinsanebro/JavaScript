@@ -1,0 +1,65 @@
+A js engine is a program that executes the js code. There are a lot of steps involved but executing code 
+is what a js engine does.
+
+
+Every browser has its own js engine but the most well-known is Google's V8 engine.
+
+V8 powers Chrome as well as Node-> it is a runtime outside of the browser which enables us to make
+server side applications with js.
+
+Component of JS Engine:-
+
+The js engine consists of a Call Stack and a heap.
+
+The call stack is where the js code is ecexecuted with the help of something called execution context.
+
+Heap is an unstructured memory pool which stores all the objects that our application needs.
+
+This is how the code is executed but how is our code compiled to machine code?
+
+
+Compilation vs Interpretation
+
+In compilation , the source code is converted to portable machine code which can be executed
+way after it has been compiled. 
+
+
+Source code   ---->   Machine code    -------->     Program running
+                                       (execution)
+execution can happen way after compilation.
+
+
+In interpretation, the code is converted to machine code and is executed line by line. Here also, the source code is converted to machine code but it happens simply before it is executed and not ahead of time.
+
+
+js used to be an interpreted language but now it is Just-in-time compiled language.
+
+So now, the code is compiled first means it is converted to machine code and that compiled code is executed
+immediately means there is no portable file. Execution happens immediately after compilation.
+
+
+How js code is executed in the js engine:-
+
+So, when js code comes into the js engine then it is parsed and it is converted to AST (Abstract Syntax Tree).
+This step also checks if there are any syntax errors in the code.
+Then AST is then compiled into machine code and then it is executed right away using just-in-time compilation. Even after execution, the js engine keeps on optimising the code in background and recompiling it and executing it and replacing the older lesser optimised code with new code as the execution goes on.
+
+All these things happen in some special threads which we can not be accessed through our code. Completely seperate from our main thread which is executing our code in the call stack.
+
+
+JAVASCRIPT RUNTIME 
+
+A js runtime has various components in it. The heart of any js runtime is the js engine which has the call stack and the heap. 
+
+
+Along with it, js runtime has Web APIs like DOM, timers ,fetch APIs, console.log() etc. 
+These Web APIs are not part of js engine but it gets access to them through the global Window Object.
+
+A js runtime also has a CallBack Queue which is a DS containing all the functions that are ready to be executed.
+
+EventHandler functions are also the callBack functions. As the event happens, the callback function will be called.
+On happening of event, the callback function will be put in the callBack queue, then when callStack is empty, it will be passed to the Call Stack so that it can be executed. This is done by something called the event loop. It takes the function from the callBack queuecall and put it in the call stack for execution.
+
+
+
+In node.js js runtime, everything in same but in place of Web APIs, we have C++ bindings and thread pool.
