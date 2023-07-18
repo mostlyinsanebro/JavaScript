@@ -1,0 +1,63 @@
+1. JavaScript is a high-level language.
+
+It means we do not have to worry about resource management in order to run our program.
+For e.x. -> In C language, we have to request for memory from computer in order to create a variable
+but in js or python, this is not the case. We do not have to manage resources at all because these 
+languages have so-called abstractions in them which takes this work away from us and makes the language easier to use.
+But the downside is that the programs will never be as fast or optimised as C programs. This
+
+One of the tools which does memory management for us in js is Garbage Collection.
+
+
+2. Garabage collection is an algorithm in the js engine which automatically removes all unused objects from the computer memory
+in order not to clog it up with unnecessary stuff. So, it is just like js has a cleaning guy who cleans our memory from time to time so that we do not have to do it in our code.
+
+
+3. js is an interpreted or Just-in-Time Compiled Language. 
+
+It means that the code is converted to machine-code line by line.This happens inside the js engine.
+
+
+4. js is a multi-paradigm programming language.
+
+It means we can use any of the three coding paradigms in order to write our code.
+i). Procedural programming. -> we have been using this one so far.
+ii). Object-Oriented Programming.
+iii). Functional Programming.
+
+
+5. The object-oriented approach of js is prototype based object-oriented approach.
+
+
+Almost everything in js is an object except for the primitive values such as numbers, strings etc.
+
+but arrays for ex are objects. We  create arrays from the array blueprint which is an array blueprint (prototype). This prototype contains all the array methods and our newly created array inherits this prototype and it's methods and then we use them in our new arrays.
+
+
+6. js is a language with first-class functions.
+
+In a language with first-class functions, functions are treated as variables. We can pass them into other functions and return them from functions as well.
+
+
+7. js is a dynamic language means js is dynamically typed language.
+
+There are no data type definitions, types become known at runtime and the data type of values assigned to variables can change as well.
+
+
+8. js is a single-threaded language.
+
+It means that js can do one thing at a time.
+
+
+So, what happens if js is executing a line of code and it takes a lot of time to return the result, then our execution will be stuck at that line only until we get the result for that line.
+
+
+To handle this js uses non-blocking event loop. 
+
+
+9. Non - blocking event loop.
+
+It means that this event loop takes a long running task out of the thread, executes it in the background and then puts them back in the thread once they are finished. 
+
+This is somewhat how js handles multiples tasks happening at the same time even by being single- threaded.
+
