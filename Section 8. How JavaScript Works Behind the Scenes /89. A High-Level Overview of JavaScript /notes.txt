@@ -10,12 +10,13 @@ One of the tools which does memory management for us in js is Garbage Collection
 
 
 2. Garbage collection is an algorithm in the js engine which automatically removes all unused objects from the computer memory
-in order not to clog it up with unnecessary stuff. So, it is just like js has a cleaning guy who cleans our memory from time to time so that we do not have to do it in our code.
+in order not to clog it up with unnecessary stuff. So, it is just like js has a cleaning guy who cleans our memory from time to time 
+so that we do not have to do it in our code.
 
 
 3. js is an interpreted or Just-in-Time Compiled Language. 
 
-It means that the code is converted to the machine-code line by line. This happens inside the js engine.
+It means that the code is converted to the machine code line by line. This happens inside the js engine.
 
 
 4. js is a multi-paradigm programming language.
@@ -49,15 +50,16 @@ There are no data type definitions, types become known at runtime and the data t
 It means that js can do one thing at a time.
 
 
-So, what happens if js is executing a line of code and it takes a lot of time to return the result, then our execution will be stuck at that line only until we get the result for that line.
+So, what happens if js is executing a line of code and it takes a lot of time to return the result, then our execution will be stuck at that line 
+only until we get the result for that line.
 
 
 To handle this js uses a non-blocking event loop. 
 
 
-9. Non - blocking the event loop.
+9. Non-blocking the event loop.
 
 It means that this event loop takes a long-running task out of the thread, executes it in the background, and then puts them back in the thread once they are finished. 
 
-This is somewhat how js handles multiple tasks happening at the same time even by being single- threaded.
+This is somewhat how js handles multiple tasks happening at the same time even by being single-threaded.
 
