@@ -2,7 +2,6 @@ A js engine is a program that executes the js code. There are a lot of steps inv
 is what a js engine does.
 
 
-
 Every browser has its own js engine but the most well-known is Google's V8 engine.
 
 V8 powers Chrome as well as Node-> it is a runtime outside of the browser which enables us to make
