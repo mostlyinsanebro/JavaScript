@@ -58,7 +58,7 @@ only until we get the result for that line.
 To handle this js uses a non-blocking event loop. 
 
 
-9. Non-blocking the event loop.
+9. Non-blocking event loop.
 
 It means that this event loop takes a long-running task out of the thread, executes it in the background, and then puts them back in the thread once they are finished. 
 
