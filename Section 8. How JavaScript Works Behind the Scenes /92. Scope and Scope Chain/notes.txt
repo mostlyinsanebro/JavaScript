@@ -1,0 +1,15 @@
+The scopes look up for variables in bigger scopes and then use them.
+
+The let and const variables have scope limited to the block of code in which they are defined but var is not limited to the block of code in which it is defined. It is also accessible in the outer block of code that has the block.
+
+
+
+var variables are functioned scoped and not block scoped.
+
+let and const are block scoped.
+
+SCOPE CHAIN VS CALL STACK
+
+Scope chain has nothing to do with how the functions are called in the code and everything to do with how the functions are written in the code.
+
+scope chain vs call stack.png
