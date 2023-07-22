@@ -43,7 +43,9 @@ How js code is executed in the js engine:-
 
 So, when js code comes into the js engine then it is parsed and it is converted to AST (Abstract Syntax Tree).
 This step also checks if there are any syntax errors in the code.
-Then AST is then compiled into machine code and then it is executed right away using just-in-time compilation. Even after execution, the js engine keeps on optimizing the code in the background and recompiling it and executing it, and replacing the older lesser optimized code with new code as the execution goes on.
+Then AST is then compiled into machine code and then it is executed right away using just-in-time compilation. Even after execution, 
+the js engine keeps on optimizing the code in the background and recompiling it and executing it, and replacing the o
+lder lesser optimized code with new code as the execution goes on.
 
 All these things happen in some special threads which we can not be accessed through our code. Completely separate from our main thread which is 
 executing our code in the call stack.
@@ -60,7 +62,9 @@ These Web APIs are not part of the js engine but it gets access to them through 
 A js runtime also has a CallBack Queue which is a DS containing all the functions that are ready to be executed.
 
 EventHandler functions are also callback functions. As the event happens, the callback function will be called.
-On happening of an event, the callback function will be put in the callback queue, then when the call stack is empty, it will be passed to the Call Stack so that it can be executed. This is done by something called the event loop. It takes the function from the callback queue call and put it in the call stack for execution.
+On happening of an event, the callback function will be put in the callback queue, then when the call stack is empty, it will be passed to the 
+Call Stack so that it can be executed. This is done by something called the event loop. 
+It takes the function from the callback queue call and put it in the call stack for execution.
 
 
 
