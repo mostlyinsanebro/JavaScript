@@ -64,7 +64,7 @@ A js runtime also has a CallBack Queue which is a DS containing all the function
 EventHandler functions are also callback functions. As the event happens, the callback function will be called.
 On happening of an event, the callback function will be put in the callback queue, then when the call stack is empty, it will be passed to the 
 Call Stack so that it can be executed. This is done by something called the event loop. 
-It takes the function from the callback queue call and put it in the call stack for execution.
+It takes the function from the callback queue and put it in the call stack for execution.
 
 
 
