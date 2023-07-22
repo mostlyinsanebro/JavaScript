@@ -32,7 +32,8 @@ iii). Functional Programming.
 
 Almost everything in js is an object except for primitive values such as numbers, strings, etc.
 
-but arrays for ex are objects. We  create arrays from the array blueprint which is an array blueprint (prototype). This prototype contains all the array methods and our newly created array inherits this prototype and its methods and then we use them in our new arrays.
+but arrays for ex are objects. We  create arrays from the array blueprint which is an array blueprint (prototype). This prototype contains all 
+the array methods and our newly created array inherits this prototype and its methods and then we use them in our new arrays.
 
 
 6. js is a language with first-class functions.
