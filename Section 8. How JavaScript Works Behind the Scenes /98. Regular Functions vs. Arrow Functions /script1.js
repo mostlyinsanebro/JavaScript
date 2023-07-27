@@ -31,4 +31,5 @@ abhi.greet();
 // unlike functions the {} of an object does not creatre a scope but it is just an object literal.
 // The parent scope of greet() function is the gloabl scope in this case.
 
+
 // Takeaway is to never use arrow function.
