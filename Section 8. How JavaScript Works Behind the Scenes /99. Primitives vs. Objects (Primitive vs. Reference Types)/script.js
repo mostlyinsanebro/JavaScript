@@ -28,7 +28,6 @@ friend.age = 28;
 console.log(me.age);
 console.log(friend.age);
 
-
 // Here, we expected the result to be just like the primitive values that friend.age will be 28 and me.age will be 23.
 // But, what happens is that the objects are stored in heap memory and variables points to an address in call stack which in
 // turn point to the address of that object in heap.
