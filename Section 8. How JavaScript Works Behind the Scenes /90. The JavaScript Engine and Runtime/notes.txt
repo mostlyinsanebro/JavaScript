@@ -67,7 +67,6 @@ Call Stack so that it can be executed. This is done by something called the even
 It takes the function from the callback queue and put it in the call stack for execution.
 
 
-
 In node.js js runtime, everything is the same but in place of Web APIs, we have C++ bindings and a thread pool.
 
 
