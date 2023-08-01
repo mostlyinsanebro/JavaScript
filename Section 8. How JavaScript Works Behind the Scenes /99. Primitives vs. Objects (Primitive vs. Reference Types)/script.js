@@ -1,5 +1,6 @@
 "use strict";
 
+
 // Here, the age is pointing to a memory address in call stack that stored value 23.
 let age = 23;
 
