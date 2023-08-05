@@ -1,5 +1,6 @@
 // This at method is used for extracting value from a position in array which [] are used for.
 
+
 let arr = ["a", "b", "c", "d", "e"];
 console.log(arr[0]);
 
