@@ -10,6 +10,7 @@ mapdesc.forEach(function (value, key, map) {
   console.log(`${key} : ${value}`);
 });
 
+
 // forEACH with sets
 const setdesc = new Set(["USD", "INR", "EUR", "USD", "EUR", "INR"]);
 
