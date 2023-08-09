@@ -113,3 +113,22 @@ const convertEURtoUSD = (mov) => mov * EURtoUSD;
 
 const newMovements = movements.map(convertEURtoUSD);
 console.log(newMovements);
+
+// The map method calls a callback function for each of the array elements one by one
+// with three parameters, value at an index, index and the whole array. The callback function is made to return a
+// value to the map method and then the map method creates a copy of that array and put the returned callback value
+// at the indexes one by one.
+
+const movementsDescription = movements.map((mov, idx) => {
+  return `Movement ${idx + 1}: You ${
+    mov > 0 ? "deposited" : "withdrew"
+  } ${mov}`;
+
+  // if (mov > 0) {
+  //   return `Movement ${idx + 1}: You deposited ${mov}`;
+  // } else {
+  //   return `Movement ${idx + 1}: You withdrew ${Math.abs(mov)}`;
+  // }
+});
+
+console.log(movementsDescription);
