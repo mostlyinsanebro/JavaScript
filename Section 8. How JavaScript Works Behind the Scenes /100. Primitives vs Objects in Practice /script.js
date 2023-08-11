@@ -3,6 +3,7 @@ let lastName = "Prajapati";
 let oldlastName = lastName;
 // At this point, both these are pointing to the same memory location in stack.
 
+
 lastName = "Dhuran";
 // Here, lastName started pointing to a new memory location which contains 'Dhuran'.
 // This is how primitives work in js.
