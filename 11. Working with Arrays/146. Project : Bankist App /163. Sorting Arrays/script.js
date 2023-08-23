@@ -4,6 +4,7 @@
 /////////////////////////////////////////////////
 // BANKIST APP
 
+
 // Data
 const account1 = {
   owner: "Jonas Schmedtmann",
