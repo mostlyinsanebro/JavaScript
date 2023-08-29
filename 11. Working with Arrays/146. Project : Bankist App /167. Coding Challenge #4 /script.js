@@ -5,6 +5,7 @@ const dogs = [
   { weight: 32, curFood: 340, owners: ["Michael"] },
 ];
 
+
 // Challenge 1.
 dogs.forEach((dog) => {
   dog.recFood = Math.trunc(dog.weight ** 0.75 * 28);
