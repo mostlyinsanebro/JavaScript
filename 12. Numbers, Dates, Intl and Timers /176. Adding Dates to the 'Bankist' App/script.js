@@ -87,14 +87,14 @@ const inputClosePin = document.querySelector('.form__input--pin');
 // We want to first sort the movements of an account and then add Elements in that order.
 
 // Set sort to false by default.
-const addElements = function (movements, sort = false) {
+const addElements = function (acc, sort = false) {
   // make a copy of original array and sort it if sort is true
   const movs = sort
-    ? movements.slice().sort((a, b) => {
+    ? acc.movements.slice().sort((a, b) => {
         if (a > b) return 1;
         else return -1;
       })
-    : movements;
+    : acc.movements;
 
   // We want that the previous transaction are no more visible on the container.
   containerMovements.innerHTML = '';
@@ -103,11 +103,21 @@ const addElements = function (movements, sort = false) {
   // to the container element from bottom-to-top one-by-one.
   // Use forEach for that purpose.
   movs.forEach(function (movement, i) {
+    // Now, get the corresponding date of the existing element from the movementDates
+    // array of that same function.
+    const now = new Date(acc.movementsDates[i]);
+    const Year = now.getFullYear();
+    const Month = `${now.getMonth()}`.padStart(2, 0);
+    const Day = `${now.getDate()}`.padStart(2, 0);
+
+    const displayDate = `${Day}/${Month}/${Year}`;
+
     // Add the div section to the container.
     const type = movement > 0 ? 'deposit' : 'withdrawal';
     const html = ` 
     <div class="movements__row">
     <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+    <div class="movements__date">${displayDate}</div>
     <div class="movements__value">${movement.toFixed(2)}💶</div>
     </div>
     `;
@@ -163,7 +173,7 @@ createUserNames(accounts);
 // UpdateUI function
 const updateUI = function (acc) {
   // Display movements for current account
-  addElements(acc.movements);
+  addElements(acc);
 
   // Display Balance for current account
   calcAndPrintBalance(acc);
@@ -215,6 +225,17 @@ btnLogin.addEventListener('click', function (e) {
     // We also want to loose focus from the pin field.
     inputLoginPin.blur();
 
+    // Calculate the current date and make the date of current balance element as Current Date
+    const now = new Date();
+    const Year = now.getFullYear();
+    const Month = `${now.getMonth()}`.padStart(2, 0);
+    const Day = `${now.getDate()}`.padStart(2, 0);
+
+    const Hour = `${now.getHours()}`.padStart(2, 0);
+    const Minute = `${now.getMinutes()}`.padStart(2, 0);
+
+    labelDate.textContent = `${Year}/${Month}/${Day} ${Hour}:${Minute}`;
+
     updateUI(currentUser);
   }
 });
@@ -261,6 +282,12 @@ btnTransfer.addEventListener('click', function (e) {
     // Remove the transferred (money from the current account
     currentUser.movements.push(-amount);
 
+    // Add date to the movementDates of currentUser and the receiver as well.
+    currentUser.movementsDates.push(new Date().toISOString());
+
+    // Add date to the movementDates of the receiver.
+    transferAccount.movementsDates.push(new Date().toISOString());
+
     // Now, update the UI
     updateUI(currentUser);
   }
@@ -279,6 +306,9 @@ btnLoan.addEventListener('click', function (e) {
   if (amount > 0 && currentUser.movements.some(mov => mov >= amount * 0.1)) {
     // Add loan amount to the currentUser
     currentUser.movements.push(amount);
+
+    // Add date to the movementDates of currentUser and the receiver as well.
+    currentUser.movementsDates.push(new Date().toISOString());
 
     // Update UI
     updateUI(currentUser);
@@ -325,27 +355,27 @@ let sorted = false;
 btnSort.addEventListener('click', function (e) {
   e.preventDefault();
 
-  addElements(currentUser.movements, !sorted);
+  addElements(currentUser, !sorted);
   sorted = !sorted;
 });
 
-// Display Current Date when the user logs in.
+// ADDING DATES TO 'BANKIST' APP
 
-// IMPLEMENT A FAKE LOGIN, so that we are always logged in
-currentUser = account1;
-updateUI(currentUser);
-containerApp.style.opacity = 100;
+// We will now add dates to the current balance element and all of the deposits
+// and withdrawls
 
-// Now, do the date work
-const now = new Date();
+// For that, first implement a fake login so that we do not have to login again and again
+// for testing.
 
-const day = `${now.getDay()}`.padStart(2, 0);
-const month = `${now.getMonth() + 1}`.padStart(2, 0); // month is 0  based in Date, so adding 1 to it.
-const year = now.getFullYear();
-const hour = now.getHours();
-const minute = now.getMinutes();
+currentUser = accounts[0]; // Make current as the first account
+updateUI(currentUser); // Update the UI of the page for that user
+containerApp.style.opacity = 100; // Make the opacity as 100 i.e. make movements visible.
 
-labelDate.textContent = `${day}/${month}/${year}, ${hour}:${minute}`;
+// Now,we also want to add dates to each movement of the account. For that, use the
+// new movement dates to array of each account and then add it to the movement element's HTML as well.
+
+// We have added dates to the all the existing movements. But we also need to add those to the new
+// transactions.
 /////////////////////////////////////////////////
 // LECTURES
 
@@ -358,32 +388,3 @@ const currencies = new Map([
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
-
-// MATH AND ROUNDING
-
-// ROUNDING NUMBERS
-// Math.round and Math.floor both are used to used to round off a number
-// to the nearest integer. floor () usually to one lower. Both of them do typr coecion as
-// well meaning they convert the numbers passed in strings to them to numbers themselves and then
-// work on it.
-
-console.log(Math.round('23.8'));
-console.log(Math.floor('23.8'));
-
-// Now, implement this in the request loan amount functionality,
-// whenever a person requests for a loan having decimal points, we want it to
-// be converted to the just smaller integer.
-// Also, implement it to transfer amount to another account.
-
-// ROUNDING DECIMALS
-
-// In the below line, 2.7 is a primitive.js converts it into a Number object, calls this
-// toFixed() method on this object and converts that Number object to string primitive.
-// We can convert that string back to number by adding a + with the resultant string.
-console.log(+(2.7).toFixed(2));
-
-console.log(+(2.77).toFixed(1));
-
-// Now, we want that in all the places where the decimal numbers are displayed
-// they are runded off to only 2 decimal places.
-// For that we will have to make changes in the 3 functions of the updateUI function.
