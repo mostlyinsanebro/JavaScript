@@ -379,7 +379,7 @@ btnSort.addEventListener('click', function (e) {
 const logOutTimer = function () {
   // Every second the min and seconds are calculated and are displayed on the webpage
 
-  let time = 30;
+  let time = 120;
 
   const tick = function () {
     const min = `${Math.floor(time / 60)}`.padStart(2, 0);
