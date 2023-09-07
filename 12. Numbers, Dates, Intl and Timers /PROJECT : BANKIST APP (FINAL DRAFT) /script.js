@@ -501,4 +501,4 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // In the updateUI functionality, add the timer functionality using the setInterval function.
 // So that whenever, we login to an account or make any transaction, the timer restarts.
-// On reaching 0, user must be logged out.
+// On reaching 0, user must be logged out. - DONE
