@@ -113,6 +113,37 @@ const createUsernames = function () {
 
 createUsernames();
 
+let timer;
+
+// Add Timer functionality
+const addTimer = function () {
+  // We first want that out timer shows 2 minutes.
+  let time = 120;
+  let mins = `${Math.floor(time / 60)}`.padStart(2, 0);
+  let secs = `${time % 60}`.padStart(2, 0);
+
+  labelTimer.textContent = `${mins}:${secs}`;
+
+  timer = setInterval(() => {
+    // Print each second in the timer.
+    mins = `${Math.floor(time / 60)}`.padStart(2, 0);
+    secs = `${time % 60}`.padStart(2, 0);
+
+    labelTimer.textContent = `${mins}:${secs}`;
+
+    // When time becomes 0, stop(delete) the timer and set the currentUser to undefined and make the UI blurred.
+    if (time === 0) {
+      clearTimeout(timer);
+      currentUser = '';
+      containerApp.style.opacity = 0;
+      // Reset the welcome message as well.
+      labelWelcome.textContent = 'Login to set started';
+    }
+
+    time--;
+  }, 1000);
+};
+
 const updateUI = function (acc) {
   addElements(acc);
   accountTotal(acc);
@@ -126,9 +157,17 @@ const addElements = function (acc, sorted = false) {
     ? acc.movements.slice().sort((a, b) => a - b)
     : acc.movements;
 
-  let date;
+  let dates;
   movs.forEach((movs, idx) => {
-    date = acc.movementsDates[idx];
+    dates = acc.movementsDates[idx];
+
+    // Convert this date to proper format
+    const fulldate = new Date(dates);
+    const year = `${fulldate.getFullYear()}`.slice(-2);
+    const month = `${fulldate.getMonth() + 1}`.padStart(2, 0);
+    const date = `${fulldate.getDate()}`.padStart(2, 0);
+
+    const displayDate = `${date}/${month}/${year}`;
     // Now, add corrsponding transactions to the currentUser transactions.
     const typeOfTransaction = movs > 0 ? `deposit` : `withdrawal`;
     const html = `
@@ -136,7 +175,7 @@ const addElements = function (acc, sorted = false) {
        <div class="movements__type movements__type--${typeOfTransaction}">${
       idx + 1
     } ${typeOfTransaction}</div>
-    <div class="movements__date">${date}</div>
+    <div class="movements__date">${displayDate}</div>
        <div class="movements__value">${movs.toFixed(2)}💶</div>
      </div>
  `;
@@ -165,10 +204,11 @@ const summarizeAccount = function (acc) {
     0
   );
 
-  const withdrawls = acc.movements.reduce(
+  let withdrawls = acc.movements.reduce(
     (acc, mov) => (mov < 0 ? acc + mov : acc + 0),
     0
   );
+  withdrawls = -withdrawls;
 
   const interest = total * 0.1;
 
@@ -176,7 +216,9 @@ const summarizeAccount = function (acc) {
   labelSumIn.textContent = `${deposits.toFixed(2)}💶`;
   labelSumOut.textContent = `${withdrawls.toFixed(2)}💶`;
 };
+
 let currentUser;
+
 // LOGIN Functionality
 btnLogin.addEventListener('click', function (e) {
   // This function stops the form from submitting and refreshing the whole page.
@@ -212,6 +254,23 @@ btnLogin.addEventListener('click', function (e) {
 
     // Make the app visible
     containerApp.style.opacity = 100;
+
+    // Add the current date here
+    const fulldate = new Date();
+    const year = fulldate.getFullYear();
+    const month = `${fulldate.getMonth()}`.padStart(2, 0);
+    const date = `${fulldate.getDate()}`.padStart(2, 0);
+
+    const hours = `${fulldate.getHours()}`.padStart(2, 0);
+    const minutes = `${fulldate.getMinutes()}`.padStart(2, 0);
+
+    labelDate.textContent = `${date}/${month}/${year} ${hours}:${minutes}`;
+
+    // First check if any timer exists previosly, if it does clear it first, so that when we login to another account
+    // while the first one is still in progress, then two timers will be runnoing at the same time and
+    // that will be problematic.
+    if (timer) clearInterval(timer);
+    addTimer();
 
     // This function adds elements to the current account, calculates total,in, out and interest for the current account.
     updateUI(currentUser);
@@ -262,6 +321,18 @@ btnTransfer.addEventListener('click', function (e) {
     currentUser.accountBalance -= transferAmount;
     accountTransfer.movements.push(transferAmount);
 
+    // Once the loan gets approved, add that date to the existing user's movementDates array and to the
+    // transfer Account's movementDates array.
+    const now = new Date().toISOString();
+    currentUser.movementsDates.push(now);
+    accountTransfer.movementsDates.push(now);
+
+    // First check if any timer exists previosly, if it does clear it first, so that when we login to another account
+    // while the first one is still in progress, then two timers will be runnoing at the same time and
+    // that will be problematic.
+    if (timer) clearInterval(timer);
+    addTimer();
+
     // Also, update the UI of the current Account and clear the input fields.
     updateUI(currentUser);
   }
@@ -287,13 +358,25 @@ btnLoan.addEventListener('click', function (e) {
     // Loan Amount will be added to the movements array of the currentUser and the UI will be updated.
     currentUser.movements.push(loanAmount);
 
-    updateUI(currentUser);
+    // Once the loan gets approved, add that date to the existing user's movementDates array.
+    const now = new Date().toISOString();
+    currentUser.movementsDates.push(now);
 
     // Clear the input field
     inputLoanAmount.value = '';
 
     // Remove focus from the input field
     inputLoanAmount.blur();
+
+    // First check if any timer exists previosly, if it does clear it first, so that when we login to another account
+    // while the first one is still in progress, then two timers will be runnoing at the same time and
+    // that will be problematic.
+    if (timer) clearInterval(timer);
+    addTimer();
+
+    setTimeout(() => {
+      updateUI(currentUser);
+    }, 2500);
   }
 });
 
@@ -315,6 +398,8 @@ btnClose.addEventListener('click', function (e) {
 
     // Make the UI as invisible
     containerApp.style.opacity = 0;
+    currentUser = '';
+    labelWelcome.textContent = 'Login to set started';
   }
 
   // Now,clear the input fields and make the app blur
@@ -394,11 +479,26 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 // Only used Math.round() and toFixed() functions.
 
 // Step 7.
-// Add dates to the application.
-
-// Step 8.
-// Add timer to application.
+// On loggin in, first display the current date. -- DONE
+// Add dates to the application. -- Added to existing transactions -- DONE
+// Add dates to the transferAmount functionality and add to Loan functionality. -- DONE
 
 // Step 9.
 // Also add the functionality that the loan gets approved and added after 3 seconds to the current account
 // -- Had problem in it, search it.
+
+// Solution - I wrapped my callback updateUI() function in an arraow function.
+// Why was it not working before and why it worked now -- DONE
+
+// This has something to do with the this keyword.The arrow function takes the this from the
+// nearest lexical scope and thus it is more predictable while being used as a callback function
+// while the regular functions do not have their own this keyword. So, when the setTimeOut uses them as
+// callbacks, the this keyword of the regular function points to the global object (i.e. window in case)
+// of browser, which makes it's behaviour unexpected.
+
+// Step 8.
+// Add timer to application.
+
+// In the updateUI functionality, add the timer functionality using the setInterval function.
+// So that whenever, we login to an account or make any transaction, the timer restarts.
+// On reaching 0, user must be logged out.
