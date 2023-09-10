@@ -1,0 +1,33 @@
+We are going to see how the DOM works behind the scenes and how it is organized internally.
+
+DOM is basically an interface between our js code and the HTML documents that are rendered in and by the browser.
+
+Through DOM, we can make our js interact with the browser.
+
+This works because a DOM tree is generated from any HTML document which is a tree like structure containing nodes which we can then interact with using js through DOM API.
+
+DOM API has a lot of functions and methods that allow us to interact with the DOM tree through our js.
+
+In DOM, there are different types of nodes. Some nodes are HTML elements but others are just text and all these different methods and properties are organized into these different types of objects.
+
+First, every single node in the DOM tree is of the type Node and every node is represented by an object which gets access to special node methods and properties such as textContent(),
+childNodes(),parentNodes() etc.
+
+This Node type has a couple of child types which have access to various methods() and properties.
+
+These child nodes in DOM Tree are able to access all the properties and methods of the parent object due to inheritance as shown in the diagram.
+
+Whenever there is text inside an HTML element, it gets its own node and it will be of type text, same is true for HTML comments. 
+
+For the element itself, there is the element type node which gives the html element diffferent properties such as classList, innerHTML, querySelector etc.
+
+Each element internally is represented by an object.
+
+This element node type has HTMLElement child type and that element type has excatly on child type for each HTML element that exists in HTML.
+
+So ,we have a special node type for anchor element, special node type for links and special node type for images because these different node types can have access to different methods.
+
+All the child types will get access to methods and properties to parent node types.
+
+DOM API is broken up in these different type of nodes and these nodes have access to different methods which enable us to make manipulations to the web page through js.
+
