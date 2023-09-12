@@ -34,3 +34,5 @@ Also, not all the events have a capturing and bubbling phase, they are created d
 we can only handle them there but most have capturing and bubbling phase.
 
 This capturing and bubbling of events is event propagation.
+
+
