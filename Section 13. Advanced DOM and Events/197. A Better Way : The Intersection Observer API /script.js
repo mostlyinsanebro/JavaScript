@@ -11,6 +11,7 @@ const tabContainer = document.querySelector('.operations__tab-container');
 const operationContent = document.querySelectorAll('.operations__content');
 const headerElem = document.querySelector('.header');
 
+
 ///////////////////////////////////////////////////////////////////////////////////
 
 // MODAL WINDOW
