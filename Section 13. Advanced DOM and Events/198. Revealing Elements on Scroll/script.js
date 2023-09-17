@@ -297,10 +297,16 @@ const sectionObserverCallback = function (entries, observer) {
   // Add logic, make the element visible by removing the section--hidden class
   // and then also remove the observer from the element.
 
+  // By default, the IntersectionObserver returns an entry when we are on the starting on the page and thus
+  // the sction 1 is alredy there is is not then can not be revealed.
+
+  // To handle thus
   // First, take the entry as input
 
   const entry = entries[0];
-  console.log(entry.target);
+
+  // Also, if the element is not intersecting, the do not remove the section--hidden class from it.
+  if (!entry.isIntersecting) return;
 
   // Remove-hidden class from the target element.
   entry.target.classList.remove('section--hidden');
@@ -326,6 +332,7 @@ document.querySelectorAll('.section').forEach(sec => {
 });
 
 //////////////////////////////////////////////////////////////////////////////////
+
 // SELECT DOM ELEMENTS
 
 // // For selecting the whole html document
