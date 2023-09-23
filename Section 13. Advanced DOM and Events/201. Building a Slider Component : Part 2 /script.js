@@ -1,5 +1,6 @@
 'use strict';
 
+
 const btnScroll = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 const openAccount = document.querySelectorAll('.btn--show-modal');
