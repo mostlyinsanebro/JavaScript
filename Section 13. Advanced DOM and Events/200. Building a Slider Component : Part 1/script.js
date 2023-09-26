@@ -324,7 +324,7 @@ const sectionObserver = new IntersectionObserver(sectionObserverCallback, {
 // Add observer on all the sections.
 document.querySelectorAll('.section').forEach(sec => {
   // First add tyhe section hidden class to every section
-  //sec.classList.add('section--hidden');  -- TO BE UNCOMMENTED.
+  // sec.classList.add('section--hidden');    COMMEDTED FOR SLIDER COMPONENT
 
   // Now, add observer to each section
   // This will trigger the cb function everytime each section intersects with the root element equal to threshold %.
@@ -376,63 +376,65 @@ images.forEach(img => imageObserver.observe(img));
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-// BUILDING A SLIDER COMPONENT : PART 1
+//  BUILDING A SLIDER COMPONENT
 
-// First, remove the hidden class from each section for the time being.
+// First of all, we have changed the slider pages in the slider by images for simplicity in html file.
 
-// After that, we have removed the text elements and made the pics visible.
-
-// Now, the pics are overlapping each other, so to solve that I will loop over the images and then
-// set their x coordinates as 0%, 100%, 200%, 300% and so on, so that they are no longer overallped with one another.
-
+// Now, we will select each page and set it's X asis to i*100 %, this way they will be displayed
+// one after the other in horizontal fashion.
 const sliderImages = document.querySelectorAll('.slide');
-const btnRight = document.querySelector('.slider__btn--right');
-const btnLeft = document.querySelector('.slider__btn--left');
-
-let curSlider = 0;
-let maxSlider = sliderImages.length;
-// Query over each silerImage and make it's transformX as 0%,100%,200%,300%.
-
-sliderImages.forEach((img, i) => {
-  img.style.transform = `translateX(${i * 100}%)`;
-});
-
-// Now, make the images smaller and for the sake of seeing all of them for testing and make the
-// overflow visible, the=at way they all will be visible and also shift them slightly left so we see all the images
-// at the same time.
 const slider = document.querySelector('.slider');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
 
-// Now, make the right button of the slider work.
-btnRight.addEventListener('click', function () {
-  // After going to far right, come to 0th image.
-  if (curSlider == maxSlider - 1) {
-    curSlider = 0;
-  } else {
-    curSlider++;
-  }
-  // slide every image to 100 right.
-  sliderImages.forEach((img, i) => {
-    img.style.transform = `translateX(${(i - curSlider) * 100}%)`;
+let curSlide = 0;
+const maxSlide = sliderImages.length;
+
+// Make the slider small in size so that it becomes easier for development
+slider.style.overflow = 'visible';
+slider.style.transform = 'scale(0.4) translateX(-1200px)';
+
+const goToSlide = function (slide) {
+  sliderImages.forEach((s, i) => {
+    s.style.transform = `translateX(${(i - slide) * 100}%)`;
   });
-  // -100, 0, 100 , 200
-});
+};
 
-// Now, make the left button of the slider work.
-btnLeft.addEventListener('click', function () {
-  // After going to far left, come to n-1th image.
-  if (curSlider == 0) {
-    curSlider = maxSlider - 1;
+goToSlide(0);
+
+const nextSlide = function () {
+  // If the sliderreaches the last slide, go back to first slide else increase the slide by 1
+  // which will shift the slider to the next image on the right.
+
+  if (curSlide == maxSlide - 1) {
+    curSlide = 0;
   } else {
-    curSlider--;
+    curSlide++;
   }
-  // slide every image to 100 right.
-  sliderImages.forEach((img, i) => {
-    img.style.transform = `translateX(${(i - curSlider) * 100}%)`;
-  });
-  // -100, 0, 100 , 200
-});
 
-/////////////////////////////////////////////////////////////////////
+  // When we click the right button, we want that every image is shifted to the right.
+  goToSlide(curSlide);
+};
+
+const prevSlide = function () {
+  if (curSlide == 0) {
+    curSlide = maxSlide - 1;
+  } else {
+    curSlide--;
+  }
+
+  // When we click the right button, we want that every image is shifted to the right.
+  goToSlide(curSlide);
+};
+
+// Now, on clicking the right button, we want that our slider goes to next slide
+// which will mean that the translateX will be shifted by a 100 for all the images.
+btnRight.addEventListener('click', nextSlide);
+
+// Now, add functionality for images on the btnLeft.
+btnLeft.addEventListener('click', prevSlide);
+
+//////////////////////////////////////////////////////////////////////////////////////
 // SELECT DOM ELEMENTS
 
 // // For selecting the whole html document
