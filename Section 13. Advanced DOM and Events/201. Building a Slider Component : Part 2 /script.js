@@ -1,6 +1,5 @@
 'use strict';
 
-
 const btnScroll = document.querySelector('.btn--scroll-to');
 const section1 = document.querySelector('#section--1');
 const openAccount = document.querySelectorAll('.btn--show-modal');
@@ -13,7 +12,6 @@ const operationContent = document.querySelectorAll('.operations__content');
 const headerElem = document.querySelector('.header');
 
 ///////////////////////////////////////////////////////////////////////////////////
-
 
 // MODAL WINDOW
 
@@ -326,7 +324,7 @@ const sectionObserver = new IntersectionObserver(sectionObserverCallback, {
 // Add observer on all the sections.
 document.querySelectorAll('.section').forEach(sec => {
   // First add tyhe section hidden class to every section
-  //sec.classList.add('section--hidden');  -- TO BE UNCOMMENTED.
+  sec.classList.add('section--hidden'); // COMMET FOR SLIDER COMPONENT
 
   // Now, add observer to each section
   // This will trigger the cb function everytime each section intersects with the root element equal to threshold %.
@@ -378,99 +376,136 @@ images.forEach(img => imageObserver.observe(img));
 
 //////////////////////////////////////////////////////////////////////////////////////
 
-// BUILDING A SLIDER COMPONENT : PART 1
+//  BUILDING A SLIDER COMPONENT
 
-// First, remove the hidden class from each section for the time being.
+// First of all, we have changed the slider pages in the slider by images for simplicity in html file.
 
-// After that, we have removed the text elements and made the pics visible.
+// Now, we will select each page and set it's X asis to i*100 %, this way they will be displayed
+// one after the other in horizontal fashion.
 
-// Now, the pics are overlapping each other, so to solve that I will loop over the images and then
-// set their x coordinates as 0%, 100%, 200%, 300% and so on, so that they are no longer overallped with one another.
+const sliderComponent = function () {
+  // SELECTORS
+  const sliderImages = document.querySelectorAll('.slide');
+  const slider = document.querySelector('.slider');
+  const btnLeft = document.querySelector('.slider__btn--left');
+  const btnRight = document.querySelector('.slider__btn--right');
+  const dotsContainer = document.querySelector('.dots');
 
-const sliderImages = document.querySelectorAll('.slide');
-const btnRight = document.querySelector('.slider__btn--right');
-const btnLeft = document.querySelector('.slider__btn--left');
-const dotsContainer = document.querySelector('.dots');
+  let curSlide = 0;
+  const maxSlide = sliderImages.length;
 
-let curSlider = 0;
-let maxSlider = sliderImages.length;
+  // Make the slider small in size so that it becomes easier for development
+  // slider.style.overflow = 'visible';
+  // slider.style.transform = 'scale(0.4) translateX(-1200px)';
 
-// Now, we need to add the dots to the slider.
-// For that first loop over the images and all all those dot elements to the
-// dotContainer using insertAdjacentHTML.
+  // FUNCTIONS
 
-// Query over the images and add the dots for all the images having data--slider attributes as
-// image number in it which will allow us to traverse through the images once we create the slider.
-const createDots = function () {
-  sliderImages.forEach(function (_, i) {
-    dotsContainer.insertAdjacentHTML(
-      'beforeend',
-      `<button class = "dots__dot" data-slide = "${i}"></button>`
-    );
+  const goToSlide = function (slide) {
+    sliderImages.forEach((s, i) => {
+      s.style.transform = `translateX(${(i - slide) * 100}%)`;
+    });
+  };
+
+  // Add dots for each page to the dotsContainer component
+  const addDots = function () {
+    sliderImages.forEach((_, i) => {
+      dotsContainer.insertAdjacentHTML(
+        'beforeend',
+        `
+  <button class ='dots__dot' data-slide = ${i}></button>`
+      );
+    });
+  };
+
+  // Now, we want to make the dot of the current-slide visible
+  // For that first remove the dost__dot--active class from all the dots
+  const activeDot = function (slide) {
+    document.querySelectorAll('.dots__dot').forEach((s, i) => {
+      s.classList.remove('dots__dot--active');
+    });
+
+    document
+      .querySelector(`.dots__dot[data-slide="${slide}"]`)
+      .classList.add('dots__dot--active');
+
+    // Now, add the active class to only the current-slide
+  };
+
+  const init = function () {
+    goToSlide(0);
+    addDots();
+    activeDot(0);
+  };
+  init();
+
+  const nextSlide = function () {
+    // If the sliderreaches the last slide, go back to first slide else increase the slide by 1
+    // which will shift the slider to the next image on the right.
+
+    if (curSlide == maxSlide - 1) {
+      curSlide = 0;
+    } else {
+      curSlide++;
+    }
+
+    // When we click the right button, we want that every image is shifted to the right.
+    goToSlide(curSlide);
+    activeDot(curSlide);
+  };
+
+  const prevSlide = function () {
+    if (curSlide == 0) {
+      curSlide = maxSlide - 1;
+    } else {
+      curSlide--;
+    }
+
+    // When we click the right button, we want that every image is shifted to the right.
+    goToSlide(curSlide);
+    activeDot(curSlide);
+  };
+
+  // EVENT LISTENERS
+
+  // Now, on clicking the right button, we want that our slider goes to next slide
+  // which will mean that the translateX will be shifted by a 100 for all the images.
+  btnRight.addEventListener('click', nextSlide);
+
+  // Now, add functionality for images on the btnLeft.
+  btnLeft.addEventListener('click', prevSlide);
+
+  // Now , add functionality to dots that on clicking a dot, the corresponding
+  // image will be traversed to.
+
+  // Add eventlistener to the dotContainer using event delegation.
+  dotsContainer.addEventListener('click', function (e) {
+    // If target is one of the dots, then go to the dataset-slide corresponding to that dot.
+    if (e.target.classList.contains('dots__dot')) {
+      // GO TO THE DATASLIDE OF THAT DOT
+      curSlide = Number(e.target.dataset.slide);
+
+      goToSlide(curSlide);
+      activeDot(curSlide);
+    }
+  });
+
+  // slide images on basis of keydown.
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') {
+      nextSlide();
+    }
+    if (e.key === 'ArrowLeft') {
+      prevSlide();
+    }
   });
 };
 
-createDots();
+sliderComponent();
+//////////////////////////////////////////////////////////////////////////////////////
 
-// Query over each silerImage and make it's transformX as 0%,100%,200%,300%.
-const goToImage = function (currentSlider) {
-  // slide every image to 100 right.
-  sliderImages.forEach((img, i) => {
-    img.style.transform = `translateX(${(i - currentSlider) * 100}%)`;
-  });
-};
+// ADDING THE SLIDER COMPONENT - 2
 
-// Call go to image 0 in the beginning only, so that we start from the starting image.
-goToImage(0);
-
-// Now, add eventListener to the createDots element and check which dot is being clicked on,
-// get its dataset--slide and then go to that image.
-dotsContainer.addEventListener('click', function (e) {
-  if (e.target.classList.contains('dots__dot')) {
-    // go to that image
-    const slide = e.target.dataset.slide;
-    goToImage(slide);
-  }
-});
-
-const prevSlide = function () {
-  if (curSlider == 0) {
-    curSlider = maxSlider - 1;
-  } else {
-    curSlider--;
-  }
-
-  goToImage(curSlider);
-};
-
-const nextSlide = function () {
-  if (curSlider == maxSlider - 1) {
-    curSlider = 0;
-  } else {
-    curSlider++;
-  }
-
-  goToImage(curSlider);
-};
-
-// Now, make the images smaller and for the sake of seeing all of them for testing and make the
-// overflow visible, the=at way they all will be visible and also shift them slightly left so we see all the images
-// at the same time.
-const slider = document.querySelector('.slider');
-
-// Now, make the right button of the slider work.
-btnRight.addEventListener('click', nextSlide);
-
-// Now, make the left button of the slider work.
-btnLeft.addEventListener('click', prevSlide);
-
-// Go to left or right imager based on the buttons pressed.
-document.addEventListener('keydown', function (e) {
-  if (e.key === 'ArrowRight') nextSlide();
-  else if (e.key === 'ArrowLeft') prevSlide();
-});
-
-/////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////
 // SELECT DOM ELEMENTS
 
 // // For selecting the whole html document
