@@ -1,8 +1,0 @@
-OOP is basically a way of programming which is used to code more efficiently.
-
-OOP has 4 pillars:-
-
-Abstraction
-Encapsulation
-Inheritance
-Polymorphism
