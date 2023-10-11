@@ -1,0 +1,44 @@
+Everything starts with the person constructor function which has a prototype property which is an object and inside that object
+we define the calcage method and person.prototype has a reference back to Person itself which is called the constructor property.
+
+So Person.prototype.constructor is gonna point back to Person itself.
+
+Remember, the Pesron.prototype is not the prototype of Person but of all the objects created using the Pesron constructor function.
+
+So, when we wrote 
+const Abhi = new Person('Abhi,2000);
+
+When this line gets executed, the new keyword creates a empty new object in step 1.
+In step 2, the this keyword is set to this newly created object.
+In step 3, the __proto__ property is created for the object and it is linked to the Person.prototype of the CF.
+In step 4, the newly created object is returned fromthe CF and it gets attached to Abhi variable.
+
+This is how object creation works with constructor functions and ES6 classes but not with Object.Create() syntax.
+
+Now, when we wrote Abhi.calcAge(), why did it work. 
+
+js first checked in the Abhi object for the calcAge() function but could not find it there. When js looks for
+a method or property in an Object and can not find it there, then it looks in the Object __proto__ property which has the 
+Object prototype and it finds it there and thus the calcAge() function from the __proto__ property is used.
+
+This is called prototypal inheritance or delegation. So jonas object inherited the calcAge() method from its prototype
+or delegated this function to its prototype.
+
+We can create as many person methods as we like and all of them will inherit this method and this method is not linked to 
+any object specifically. It improves the code performance.
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+PROTOTYPE CHAINING
+
+The Person.prototype is also an object and it also should have a prototype. Since, it was created using built-in object constructor function, it's prototype is the Object.prototype and thus the prototype chain is created. The Object.prototype's prototype is null.
+
+The object.protype is usually at the top of the protype chain. So, when we call a method on an object and it is not present
+there in our current object, then js looks for that method up in the protype chain and once it finds that method, it uses as
+if the method is of the current object only. This is similar to scope chaining in js.
+
+Example -> Abhi.hasOwnProperty('firstName')
+This method is not in Abhi object and also not in the Person.prototypebut it is there in the Object.prototype and uses it from 
+there for the Abhi object. 
+
+
+
