@@ -1,6 +1,7 @@
 // Create a constructor function to implement a Car. Car has a make and speed property.
 // speed is in km/h.
 
+
 const Car = function (make, speed) {
   this.make = make;
   this.speed = speed;
