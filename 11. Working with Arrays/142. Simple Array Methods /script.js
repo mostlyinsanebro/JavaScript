@@ -4,6 +4,7 @@
 // It is used to slice an array means taking a slice/part from an array and return the slice array.
 // but it does not affect the original array.
 
+
 let arr = ["a", "b", "c", "d", "e"];
 
 console.log(arr.slice(2));
