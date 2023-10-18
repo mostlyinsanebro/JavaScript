@@ -1,5 +1,6 @@
 'use strict';
 
+
 // Setters and getters on an Object.
 const abhi = {
   fitsName: 'Abhinav',
