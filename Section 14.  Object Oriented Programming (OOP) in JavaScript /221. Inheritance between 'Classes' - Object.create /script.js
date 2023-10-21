@@ -31,3 +31,4 @@ StudentProto.introduce = function () {
 const Abhinav = Object.create(StudentProto);
 Abhinav.init('Abhinav', 2000, 'CS');
 Abhinav.introduce();
+Abhinav.calcAge();
