@@ -1,5 +1,6 @@
 'use strict';
 
+
 // Creating the Parent Class
 const PersonProto = {
   calcAge() {
