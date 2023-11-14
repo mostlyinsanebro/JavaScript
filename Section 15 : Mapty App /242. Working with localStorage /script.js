@@ -1,5 +1,6 @@
 'use strict';
 
+
 // Managing Workout Data - Creating Classes
 // We will create classes now in order to manage the data that the user will create for each workout.
 // Data needed in the Workout class -> distance,duration,coords. Date and id are also needed for each workout.
