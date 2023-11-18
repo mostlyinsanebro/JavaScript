@@ -6,6 +6,7 @@
 
 
 
+
 class Workout {
   date = new Date();
   id = +(Date.now() + ' ').slice(-10); // This will give the last 10 disgits of the date
