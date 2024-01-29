@@ -5,6 +5,7 @@ let oldlastName = lastName;
 
 
 
+
 lastName = "Dhuran";
 // Here, lastName started pointing to a new memory location which contains 'Dhuran'.
 // This is how primitives work in js.
